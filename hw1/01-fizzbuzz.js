@@ -12,7 +12,7 @@ Use console.log() to write the proper output to the command line.
 
 const fizzbuzz = () => {
   // Add your code here
-    for (var counter = 1; counter < 100; counter++){
+    for (var counter = 1; counter <= 100; counter++){
         if(counter % 3 == 0 && counter % 5 == 0)
             console.log('fizzbuzz');
         else if(counter % 3 == 0)
