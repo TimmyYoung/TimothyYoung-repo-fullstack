@@ -1,61 +1,70 @@
 /** Exercise 01 - Coins **/
-
-const numberCoins = (coin_value, remaining) => {
-  // Determines number of a specified coin that can be used for remaining balance
-
-  // Map coin value to English words
-  const coin_map = {
-    1: { plural: "dollars", single: "dollar" },
-    0.25: { plural: "quarters", single: "quarter" },
-    0.1: { plural: "dimes", single: "dime" },
-    0.05: { plural: "nickels", single: "nickel" },
-    0.01: { plural: "pennies", single: "penny" },
-  };
-
-  // Determine number of coins needed for remaining balance
-  let coins = 0;
-
-  while (remaining.val >= coin_value) {
-    coins += 1;
-    remaining.val -= coin_value;
-    remaining.val = Math.round(remaining.val * 100) / 100;
-  }
-
-  // create string combining number of coins and proper English word
-  let str;
-  if (coins > 1) {
-    str = `${coins} ${coin_map[coin_value]["plural"]}`;
-  } else if (coins === 1) {
-    str = `${coins} ${coin_map[coin_value]["single"]}`;
-  } else {
-    str = ``;
-  }
-
-  // Modify str with comma if needed
-  if ((remaining.val >= 0.01) & (coins > 0)) {
-    str = `${str}, `;
-  }
-
-  return str;
-};
-
-const calculateChange = (input) => {
-  // Check that input is valid
-  if (input > 10) {
-    return `${input} ==> Error: the number is too large`;
-  }
-
-  // Determine amount of coin for each coin type and produce as string
-  remaining = { val: input };
-  let dollars_str, quarters_str, dimes_str, nickels_str, pennies_str;
-
-  dollars_str = numberCoins(1, remaining);
-  quarters_str = numberCoins(0.25, remaining);
-  dimes_str = numberCoins(0.1, remaining);
-  nickels_str = numberCoins(0.05, remaining);
-  pennies_str = numberCoins(0.01, remaining);
-
-  return `${input} ==> ${dollars_str}${quarters_str}${dimes_str}${nickels_str}${pennies_str}`;
+const makeString = (dollarAmt,quarters,dimes,nickels,pennies) => {
+    var currency = [] 
+    if(dollarAmt > 0)
+        currency.push(`${dollarAmt} dollars`);
+    if(quarters > 0)
+        currency.push(`${quarters} quarters`);
+    if(dimes > 0)     
+        currency.push(`${dimes} dimes`);
+    if(nickels > 0)     
+        currency.push(`${nickels} nickels`);
+    if(pennies > 0)     
+        currency.push(`${pennies} pennies`);
+    currency = currency.toString();
+    /*var currency = (`${dollarAmt} dollars, ${quarters} quarters, ${dimes} dimes, ${nickels} nickels, ${pennies} pennies`);*/
+    return currency
+}
+const calculateChange = (input) => {  
+    // Add your code here
+    input = input.toString();
+    var parseArray = input.split('.');
+    var dollarAmt = parseArray[0];
+    if(dollarAmt <= 10){
+        var changeAmt = parseArray[1];
+        var quarters,dimes,nickels,pennies = 0;
+        if(changeAmt >= 25){
+            if(changeAmt % 25 == 0)
+                quarters = changeAmt;
+            else
+                quarters = Math.floor(changeAmt/25);
+                changeAmt = changeAmt % 25;
+                if(changeAmt % 10 == 0)
+                    dimes = changeAmt;
+                else
+                    dimes = Math.floor(changeAmt/10);
+                    changeAmt = changeAmt % 10;
+                    if(changeAmt % 5 == 0)
+                        nickels = changeAmt;
+                    else
+                        nickels = Math.floor(changeAmt/5);
+                        pennies = changeAmt % 5;
+        }
+        else if(changeAmt >= 10){
+            if(changeAmt % 10 == 0)
+                    dimes = changeAmt;
+            else
+                dimes = Math.floor(changeAmt/10);
+                changeAmt = changeAmt % 10;
+                if(changeAmt % 5 == 0)
+                        nickels = changeAmt;
+                else
+                    nickels = Math.floor(changeAmt/5);
+                    pennies = changeAmt % 5;
+        }
+        else if(changeAmt >= 5){
+            if(changeAmt % 5 == 0)
+                nickels = changeAmt;
+            else
+                nickels = Math.floor(changeAmt/5);
+                pennies = nickels % 5;
+        }
+        else
+            pennies = changeAmt;
+        return makeString(dollarAmt,quarters,dimes,nickels,pennies)
+    }
+    else
+        return "ERROR: Number is larger than $10.";
 };
 
 // Sample Test Cases

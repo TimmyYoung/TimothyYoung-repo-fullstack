@@ -1,4 +1,5 @@
 /** Exercise 01 - Fizzbuzz
+//  Timothy Young
 
 Write a program that writes all the numbers from 1 to 100, with some exceptions: 
 - For numbers divisible by 3, print “fizz” 
@@ -11,19 +12,16 @@ Use console.log() to write the proper output to the command line.
 
 const fizzbuzz = () => {
   // Add your code here
-  const nums = Array.from(Array(100).keys());
-  nums.forEach((num) => {
-    const count = num + 1;
-    if ((count % 3 === 0) & (count % 5 === 0)) {
-      console.log("fizzbuzz");
-    } else if (count % 3 === 0) {
-      console.log("fizz");
-    } else if (count % 5 === 0) {
-      console.log("buzz");
-    } else {
-      console.log(count);
-    }
-  });
+    for (var counter = 1; counter <= 100; counter++){
+        if(counter % 3 == 0 && counter % 5 == 0)
+            console.log('fizzbuzz');
+        else if(counter % 3 == 0)
+            console.log('fizz');
+        else if(counter % 5 == 0)
+            console.log('buzz');
+        else
+            console.log(counter);
+        }
 };
 
 fizzbuzz();

@@ -12,20 +12,24 @@
     <script defer src="03-form.js"></script>
   </head>
   <body class="bg-dark">
-    <form class="bg-light border rounded w-50 mx-auto mt-5 p-3">
+    <!-- Border Section: Changed the window to half the width for portrait rectangle -->
+    <form class="bg-light border rounded w-25 mx-auto mt-5 p-3">
       <h1 class="mt-2 mb-4">Contact Form</h1>
+      <!-- Name Section -->
       <div class="form-group row">
         <label class="col-form-label col-md-12" for="name">Name *</label>
         <div class="col-md-12">
           <input type="string" class="form-control" id="name" />
         </div>
       </div>
+      <!-- Email Section -->
       <div class="form-group row">
         <label class="col-form-label col-md-12" for="email">Email *</label>
         <div class="col-md-12">
           <input type="string" class="form-control" id="email" />
         </div>
       </div>
+      <!-- Message Section -->
       <div class="form-group row">
         <label class="col-form-label col-md-12" for="message"
           >Submit your message:</label
@@ -34,12 +38,14 @@
           <textarea type="string" class="form-control" id="message"></textarea>
         </div>
       </div>
-      <div class="form-check mt-3 mb-3">
+      <!-- Checkbox Section -->
+      <div class="form-check mt-2 mb-4">
         <input type="checkbox" class="form-check-input" id="checkbox" />
         <label class="form-check-label" for="checkbox"
           >Would you like to sign up for the newsletter?</label
         >
       </div>
+      <!-- Submit/Reset Button Section -->
       <div class="form-group row m-0 mb-2">
         <input
           id="submit"
@@ -53,6 +59,7 @@
           class="btn btn-secondary col-6 border-white border-2"
           value="Reset"
         />
+      <!-- Error Handling Section -->
       </div>
       <div class="row">
         <p id="error"></p>
