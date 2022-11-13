@@ -40,9 +40,44 @@ app.get('/', (req, res) => {
   res.end();
 });
 
-app.get('/welcome', (req, res) => {});
 
-// Add your code here
+//Add your code here
+let options = {maxAge : "1d"}
+//welcome
+app.get('/welcome', (req, res) => {
+  res.status(200);
+  res.set({'Content-Type': 'text/html'});
+  res.send('Greetings Earthlings(welcome)');
+});
+//redirect
+app.get('/redirect', (req,res) => {
+  res.redirect(302, 'http://localhost:5001/redirected');
+});
+//redirected
+app.get('/redirected', (req,res) => {
+  res.status(302);
+  res.set({'Content-Type': 'text/html'});
+  res.send('Redirected!!!!');
+});
+//cache-control
+app.get('/cache', (req,res) => {
+  //Can write multiple header lines with writeHead() vs set()
+  res.writeHead(200, { 'Content-Type': 'text/plain', 'Cache-Control':'max-age = 86400'}); 
+  res.write('Setting max age to a day in units of seconds(86400)'); 
+  res.end();
+});
+//cookies
+app.get('/cookie', (req,res) => {
+  res.status(200);
+  res.cookie('hello=world', '1', { maxAge: 86400, httpOnly: true });
+  res.send(`RIP Cookie Monsta(2020)`);
+});
+//other
+app.get('/other', (req, res) => {
+  res.writeHead(404, { 'Content-Type': 'text/html'});
+  res.write(`<h1>404 Error</h1>`);
+  res.end();
+})
 
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
